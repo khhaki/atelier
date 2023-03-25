@@ -2,7 +2,8 @@ import 'package:fltratl/screens/login.dart';
 import 'package:flutter/material.dart';
 
 import '../constant/colors.dart';
-import '../constant/txtfield.dart';
+
+import '../shared/txtfield.dart';
 
 class Register extends StatelessWidget {
   const Register({super.key});

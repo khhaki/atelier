@@ -2,7 +2,7 @@ import 'package:fltratl/screens/register.dart';
 import 'package:flutter/material.dart';
 
 import '../constant/colors.dart';
-import '../constant/txtfield.dart';
+import '../shared/txtfield.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
