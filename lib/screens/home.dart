@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import '../constant/colors.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,7 +39,9 @@ class Home extends StatelessWidget {
                   ListTile(
                     title: Text("Logout"),
                     leading: Icon(Icons.exit_to_app),
-                    onTap: () {},
+                    onTap: () {
+                      FirebaseAuth.instance.signOut();
+                    },
                   ),
                 ],
               ),

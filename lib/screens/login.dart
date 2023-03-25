@@ -1,13 +1,34 @@
 import 'package:fltratl/screens/register.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import '../constant/colors.dart';
 import '../shared/txtfield.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
 
   @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  final _emailcontroller = TextEditingController();
+
+  final _passwordcontroller = TextEditingController();
+  Future SignIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailcontroller.text.trim(),
+        password: _passwordcontroller.text.trim());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -19,6 +40,7 @@ class Login extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyTextfld(
+                  cntrlr: _emailcontroller,
                   textInputTypee: TextInputType.emailAddress,
                   obsc: false,
                   hinttxt: "enter your email:",
@@ -27,6 +49,7 @@ class Login extends StatelessWidget {
                   height: 25,
                 ),
                 MyTextfld(
+                  cntrlr: _passwordcontroller,
                   textInputTypee: TextInputType.text,
                   obsc: true,
                   hinttxt: "enter password:",
@@ -37,7 +60,7 @@ class Login extends StatelessWidget {
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Btnblue)),
-                  onPressed: () {},
+                  onPressed: SignIn,
                   child: Text(
                     "Sign in",
                     style: TextStyle(fontSize: 19),

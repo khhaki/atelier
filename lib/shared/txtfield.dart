@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
 class MyTextfld extends StatelessWidget {
+  TextEditingController? cntrlr;
   bool obsc;
   String hinttxt;
   TextInputType textInputTypee;
   MyTextfld(
       {required this.hinttxt,
       required this.obsc,
-      required this.textInputTypee});
+      required this.textInputTypee,
+      this.cntrlr});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: cntrlr,
       keyboardType: textInputTypee,
       obscureText: obsc,
       decoration: InputDecoration(
