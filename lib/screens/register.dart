@@ -18,12 +18,14 @@ class _RegisterState extends State<Register> {
   final _emailcontroller = TextEditingController();
   final _confrmpass = TextEditingController();
   final _passwordcontroller = TextEditingController();
-
+  final _userncontroller = TextEditingController();
   Future SignUp() async {
     if (passcnfrmd()) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailcontroller.text.trim(),
           password: _passwordcontroller.text.trim());
+      final User? user = FirebaseAuth.instance.currentUser;
+      await user!.updateDisplayName(_userncontroller.text.trim());
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Auth()));
     }
@@ -55,10 +57,19 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MyTextfld(
+                  cntrlr: _userncontroller,
+                  textInputTypee: TextInputType.text,
+                  obsc: false,
+                  hinttxt: "enter username:",
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                MyTextfld(
                   cntrlr: _emailcontroller,
                   textInputTypee: TextInputType.text,
                   obsc: false,
-                  hinttxt: "enter your username:",
+                  hinttxt: "enter your email:",
                 ),
                 SizedBox(
                   height: 25,
