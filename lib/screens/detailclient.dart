@@ -19,8 +19,10 @@ class _detailclState extends State<detailcl> {
   final _clphone = TextEditingController();
   final _cladress = TextEditingController();
   final _cljob = TextEditingController();
-
+  final _climage = TextEditingController();
+  final _clcommand = TextEditingController();
   String formatter = DateTime.now().toString();
+  CollectionReference? lscomds;
 
   CollectionReference clientsref =
       FirebaseFirestore.instance.collection("clients");
@@ -32,6 +34,8 @@ class _detailclState extends State<detailcl> {
     _cljob.dispose();
     _clname.dispose();
     _clphone.dispose();
+    _climage.dispose();
+    _clcommand.dispose();
   }
 
   Widget build(BuildContext context) {
@@ -83,17 +87,41 @@ class _detailclState extends State<detailcl> {
                 SizedBox(
                   height: 25,
                 ),
+                MyTextfld(
+                  cntrlr: _clcommand,
+                  textInputTypee: TextInputType.text,
+                  obsc: false,
+                  hinttxt: " command:",
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                MyTextfld(
+                  cntrlr: _climage,
+                  textInputTypee: TextInputType.text,
+                  obsc: false,
+                  hinttxt: " image:",
+                ),
+                SizedBox(
+                  height: 25,
+                ),
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Btnblue)),
                   onPressed: () {
                     setState(() {
-                      clientsref.doc().set({
+                      DocumentReference motagha = clientsref.doc();
+                      motagha
+                          .collection('cmnds')
+                          .add({'those are:': 'commands'});
+                      motagha.set({
                         'name': _clname.text.trim(),
                         'phone': _clphone.text.trim(),
                         'adress': _cladress.text.trim(),
                         'job': _cljob.text.trim(),
-                        'date': formatter
+                        'date': formatter,
+                        'image': _climage.text.trim(),
+                        'comnds': lscomds,
                       });
                     });
                     Navigator.pushReplacement(context,

@@ -1,14 +1,17 @@
 class Client {
   String? name;
   String? phone;
-  DateTime? date;
+  String? adress;
+  String? job;
   String? command;
-  Client();
-  Map<String, dynamic> toJson() =>
-      {'name': name, 'phone': phone, 'date': date, 'command': command};
-  Client.fromSnapshot(snapshot)
-      : name = snapshot.data()['name'],
-        phone = snapshot.data()['phone'],
-        date = snapshot.data()['date'],
-        command = snapshot.data()['command'];
+  String? image;
+  String? idcl;
+  Client(
+      {required this.adress,
+      required this.command,
+      required this.image,
+      required this.job,
+      required this.name,
+      required this.phone,
+      required this.idcl});
 }

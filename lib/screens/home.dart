@@ -5,6 +5,10 @@ import 'package:flutter/rendering.dart';
 import '../constant/colors.dart';
 import 'clientslist.dart';
 
+class clitem {
+  String? imgpath;
+}
+
 class Home extends StatefulWidget {
   const Home({super.key});
 

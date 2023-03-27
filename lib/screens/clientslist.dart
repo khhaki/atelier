@@ -1,13 +1,12 @@
 import 'package:fltratl/model/client.dart';
 import 'package:fltratl/screens/detailclient.dart';
+import 'package:fltratl/screens/detailcltwo.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ClientLst extends StatefulWidget {
-  const ClientLst({super.key});
-
   @override
   State<ClientLst> createState() => _ClientLstState();
 }
@@ -23,15 +22,18 @@ class _ClientLstState extends State<ClientLst> {
 
     Listd.forEach((element) {
       setState(() {
-        clnts.add(element.data());
+        Map elll = element.data() as Map;
+        elll["id"] = element.id;
+
+        clnts.add(elll);
       });
     });
   }
 
-  List _clientsls = [];
   @override
   void initState() {
     getData();
+
     super.initState();
   }
 
@@ -51,18 +53,29 @@ class _ClientLstState extends State<ClientLst> {
           body: ListView.builder(
             itemCount: clnts.length,
             itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text(clnts[index]['name'].toString()),
+              return GestureDetector(
+                onTap: () {
+                  Client cllst = Client(
+                      adress: clnts[index]["adress"],
+                      command: clnts[index]["command"],
+                      image: clnts[index]["image"],
+                      job: clnts[index]["job"],
+                      name: clnts[index]["name"],
+                      phone: clnts[index]["phone"],
+                      idcl: clnts[index]["id"]);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => detailcltwo(
+                                detcl: cllst,
+                              )));
+                },
+                child: ListTile(
+                  title: Text(clnts[index]['name'].toString()),
+                ),
               );
             },
           )),
     );
-  }
-
-  Future getClilst() async {
-    var data = await FirebaseFirestore.instance.collection('clients').get();
-    setState(() {
-      _clientsls = List.from(data.docs.map((doc) => Client.fromSnapshot(doc)));
-    });
   }
 }
