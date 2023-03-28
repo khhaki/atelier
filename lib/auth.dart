@@ -18,6 +18,7 @@ Map? admi;
 
 class _AuthState extends State<Auth> {
   Future getdat(AsyncSnapshot<User?> snapshot) async {
+    await FirebaseFirestore.instance.collection("users").doc();
     await FirebaseFirestore.instance
         .collection("users")
         .doc(snapshot.data!.uid)

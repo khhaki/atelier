@@ -1,3 +1,4 @@
+import 'package:fltratl/screens/cam.dart';
 import 'package:fltratl/screens/clientslist.dart';
 import 'package:fltratl/screens/detailcltwo.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import '../shared/txtfield.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:camera/camera.dart';
 
 class detailcom extends StatefulWidget {
   Client detcl;
@@ -17,6 +19,13 @@ class detailcom extends StatefulWidget {
 }
 
 class _detailcomState extends State<detailcom> {
+  camee() async {
+    final cameras = await availableCameras();
+
+    // Get a specific camera from the list of available cameras.
+    return cameras.first;
+  }
+
   final _cmtitle = TextEditingController();
   final _cmdesc = TextEditingController();
   final _cmdimg = TextEditingController();
@@ -41,7 +50,7 @@ class _detailcomState extends State<detailcom> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('Client information')),
+          title: Center(child: Text('Command information')),
         ),
         backgroundColor: Color.fromARGB(255, 252, 252, 249),
         body: Center(
@@ -68,11 +77,27 @@ class _detailcomState extends State<detailcom> {
                 SizedBox(
                   height: 25,
                 ),
-                MyTextfld(
-                  obsc: false,
-                  cntrlr: _cmdimg,
-                  textInputTypee: TextInputType.text,
-                  hinttxt: " image:",
+                Row(
+                  children: [
+                    Text(
+                      '  Image:  ',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    ElevatedButton(
+                        onPressed: () async {
+                          final firstCamera = await camee();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TakePictureScreen(
+                                        camera: firstCamera,
+                                      )));
+                        },
+                        child: Text('Take a picture'))
+                  ],
+                ),
+                SizedBox(
+                  height: 300,
                 ),
                 ElevatedButton(
                   style: ButtonStyle(

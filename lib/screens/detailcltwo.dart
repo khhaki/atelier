@@ -81,6 +81,13 @@ class _detailcltwoState extends State<detailcltwo> {
                               )));
                 },
                 child: ListTile(
+                  autofocus: true,
+                  leading: CircleAvatar(
+                    child: Text(comnds[index]["image"]
+                        .toString()
+                        .split('')[0]
+                        .toUpperCase()),
+                  ),
                   title: Text(comnds[index]['title'].toString()),
                 ),
               );

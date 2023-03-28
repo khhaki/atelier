@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/rendering.dart';
 import '../constant/colors.dart';
 import 'clientslist.dart';
+import 'dart:ui' as ui;
 
 class clitem {
   String? imgpath;
@@ -30,6 +31,9 @@ class _HomeState extends State<Home> {
               Column(
                 children: [
                   UserAccountsDrawerHeader(
+                    currentAccountPicture: CircleAvatar(
+                        backgroundImage:
+                            AssetImage('lib/assets/imgs/images.png')),
                     accountEmail: Text(user!.email.toString()),
                     accountName: Text(user!.displayName.toString()),
                   ),
@@ -67,39 +71,29 @@ class _HomeState extends State<Home> {
         body: GridView(
             children: [
               GridTile(
-                  child: Icon(
-                Icons.book,
-                size: 150,
-              )),
+                  child:
+                      Image(image: AssetImage('lib/assets/imgs/contable.png'))),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ClientLst()));
                 },
                 child: GridTile(
-                    footer: Center(
-                      child: Text(
-                        "Clients",
-                        style: TextStyle(fontSize: 40),
+                    child: Stack(
+                  children: [
+                    Positioned(
+                      top: 1,
+                      bottom: 1,
+                      left: 1,
+                      right: 1,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: Image(
+                            image: AssetImage('lib/assets/imgs/6009864.png')),
                       ),
                     ),
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          top: 1,
-                          bottom: 1,
-                          left: 1,
-                          right: 1,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Icon(
-                              Icons.man_2,
-                              size: 150,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
+                  ],
+                )),
               ),
               GridTile(
                   child: Icon(
