@@ -1,4 +1,3 @@
-import 'package:fltratl/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,14 +9,14 @@ class clitem {
   String? imgpath;
 }
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Hometwo extends StatefulWidget {
+  const Hometwo({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Hometwo> createState() => _HometwoState();
 }
 
-class _HomeState extends State<Home> {
+class _HometwoState extends State<Hometwo> {
   final user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
@@ -66,11 +65,6 @@ class _HomeState extends State<Home> {
         ),
         body: GridView(
             children: [
-              GridTile(
-                  child: Icon(
-                Icons.book,
-                size: 150,
-              )),
               GestureDetector(
                 onTap: () {
                   Navigator.push(context,
@@ -101,11 +95,6 @@ class _HomeState extends State<Home> {
                       ],
                     )),
               ),
-              GridTile(
-                  child: Icon(
-                Icons.currency_exchange,
-                size: 150,
-              )),
             ],
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

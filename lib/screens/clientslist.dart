@@ -16,6 +16,7 @@ class _ClientLstState extends State<ClientLst> {
   getData() async {
     CollectionReference clientsref =
         FirebaseFirestore.instance.collection("clients");
+
     QuerySnapshot clquery =
         await clientsref.orderBy('date', descending: false).get();
     var Listd = clquery.docs;

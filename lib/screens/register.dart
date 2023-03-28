@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../constant/colors.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../shared/txtfield.dart';
 
 class Register extends StatefulWidget {
@@ -19,13 +19,25 @@ class _RegisterState extends State<Register> {
   final _confrmpass = TextEditingController();
   final _passwordcontroller = TextEditingController();
   final _userncontroller = TextEditingController();
+  final _adminpass = TextEditingController();
+  bool admin = false;
   Future SignUp() async {
     if (passcnfrmd()) {
+      CollectionReference userref =
+          FirebaseFirestore.instance.collection("users");
+      print('llllllllllllllll');
+      print(_adminpass.text.trim());
+      if (_adminpass.text.trim() == 'omi@baka') {
+        admin = true;
+      }
+
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _emailcontroller.text.trim(),
           password: _passwordcontroller.text.trim());
       final User? user = FirebaseAuth.instance.currentUser;
-      await user!.updateDisplayName(_userncontroller.text.trim());
+      userref.doc(user!.uid).set({'admin': admin});
+      await user.updateDisplayName(_userncontroller.text.trim());
+
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Auth()));
     }
@@ -88,6 +100,15 @@ class _RegisterState extends State<Register> {
                   textInputTypee: TextInputType.text,
                   obsc: true,
                   hinttxt: "confirm password:",
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                MyTextfld(
+                  cntrlr: _adminpass,
+                  textInputTypee: TextInputType.text,
+                  obsc: true,
+                  hinttxt: "admin password:",
                 ),
                 SizedBox(
                   height: 25,
