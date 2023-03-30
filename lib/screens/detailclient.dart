@@ -87,24 +87,6 @@ class _detailclState extends State<detailcl> {
                 SizedBox(
                   height: 25,
                 ),
-                MyTextfld(
-                  cntrlr: _clcommand,
-                  textInputTypee: TextInputType.text,
-                  obsc: false,
-                  hinttxt: " command:",
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                MyTextfld(
-                  cntrlr: _climage,
-                  textInputTypee: TextInputType.text,
-                  obsc: false,
-                  hinttxt: " image:",
-                ),
-                SizedBox(
-                  height: 25,
-                ),
                 ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Btnblue)),
@@ -122,7 +104,7 @@ class _detailclState extends State<detailcl> {
                         'date': formatter,
                         'image': _climage.text.trim(),
                         'comnds': lscomds,
-                      });
+                      }, SetOptions(merge: true));
                     });
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => ClientLst()));

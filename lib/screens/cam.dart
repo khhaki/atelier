@@ -2,14 +2,19 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:fltratl/model/client.dart';
+import 'package:fltratl/screens/disply.dart';
 import 'package:flutter/material.dart';
 
 // A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
-  const TakePictureScreen({
-    super.key,
-    required this.camera,
-  });
+  String rann;
+  Client dtcl;
+  TakePictureScreen(
+      {super.key,
+      required this.camera,
+      required this.dtcl,
+      required this.rann});
 
   final CameraDescription camera;
 
@@ -82,10 +87,11 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             await Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => DisplayPictureScreen(
-                  // Pass the automatically generated path to
-                  // the DisplayPictureScreen widget.
-                  imagePath: image.path,
-                ),
+                    rann: widget.rann,
+                    // Pass the automatically generated path to
+                    // the DisplayPictureScreen widget.
+                    imagePath: image.path,
+                    dtcl: widget.dtcl),
               ),
             );
           } catch (e) {
@@ -95,23 +101,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         },
         child: const Icon(Icons.camera_alt),
       ),
-    );
-  }
-}
-
-// A widget that displays the picture taken by the user.
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
-
-  const DisplayPictureScreen({super.key, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Display the Picture')),
-      // The image is stored as a file on the device. Use the `Image.file`
-      // constructor with the given path to display the image.
-      body: Image.file(File(imagePath)),
     );
   }
 }

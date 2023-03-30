@@ -10,15 +10,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:camera/camera.dart';
+import 'package:random_string/random_string.dart';
+import 'dart:math' show Random;
 
 class detailcom extends StatefulWidget {
   Client detcl;
-  detailcom({required this.detcl});
+  String dwnurl;
+  detailcom({required this.detcl, this.dwnurl = ''});
   @override
   State<detailcom> createState() => _detailcomState();
 }
 
 class _detailcomState extends State<detailcom> {
+  String ran = randomAlpha(8);
   camee() async {
     final cameras = await availableCameras();
 
@@ -72,7 +76,7 @@ class _detailcomState extends State<detailcom> {
                   cntrlr: _cmdesc,
                   textInputTypee: TextInputType.text,
                   obsc: false,
-                  hinttxt: " description:",
+                  hinttxt: " description and price:",
                 ),
                 SizedBox(
                   height: 25,
@@ -90,8 +94,9 @@ class _detailcomState extends State<detailcom> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => TakePictureScreen(
-                                        camera: firstCamera,
-                                      )));
+                                      camera: firstCamera,
+                                      dtcl: widget.detcl,
+                                      rann: ran)));
                         },
                         child: Text('Take a picture'))
                   ],
@@ -103,14 +108,19 @@ class _detailcomState extends State<detailcom> {
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(Btnblue)),
                   onPressed: () {
-                    setState(() {
-                      getData().doc().set({
+                    {
+                      getData().doc(ran).set({
                         'title': _cmtitle.text.trim(),
                         'description': _cmdesc.text.trim(),
-                        'image': _cmdimg.text.trim(),
                         'date': formatter,
-                      });
-                    });
+                        'frstq': false,
+                        'scndq': false,
+                        'thrdq': false,
+                        'rand': ran,
+                        'sndid': widget.detcl.idcl.toString()
+                      }, SetOptions(merge: true));
+                    }
+                    ;
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

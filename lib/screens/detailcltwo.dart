@@ -61,7 +61,9 @@ class _detailcltwoState extends State<detailcltwo> {
             },
             child: Icon(Icons.add),
           ),
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Center(child: Text("client's comands")),
+          ),
           body: ListView.builder(
             itemCount: comnds.length,
             itemBuilder: (BuildContext context, int index) {
@@ -71,6 +73,11 @@ class _detailcltwoState extends State<detailcltwo> {
                     title: comnds[index]["title"],
                     description: comnds[index]["description"],
                     image: comnds[index]["image"],
+                    frstq: comnds[index]["frstq"],
+                    scndq: comnds[index]["scndq"],
+                    thrdq: comnds[index]["thrdq"],
+                    ran: comnds[index]["rand"],
+                    sndid: comnds[index]["sndid"],
                   );
 
                   Navigator.push(
@@ -83,7 +90,7 @@ class _detailcltwoState extends State<detailcltwo> {
                 child: ListTile(
                   autofocus: true,
                   leading: CircleAvatar(
-                    child: Text(comnds[index]["image"]
+                    child: Text(comnds[index]["title"]
                         .toString()
                         .split('')[0]
                         .toUpperCase()),

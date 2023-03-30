@@ -50,7 +50,7 @@ class _ClientLstState extends State<ClientLst> {
             child: Icon(Icons.add),
           ),
           appBar: AppBar(
-            actions: [Icon(Icons.abc)],
+            title: Center(child: Text('clients list')),
           ),
           body: ListView.builder(
             itemCount: clnts.length,
