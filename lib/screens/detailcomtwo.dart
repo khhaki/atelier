@@ -32,153 +32,155 @@ class _detcomtwoState extends State<detcomtwo> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
-        body: Column(
-          children: [
-            GestureDetector(
-              child: (widget.detcom.image == null)
-                  ? Text("no image")
-                  : Image.network(widget.detcom.image.toString()),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MyWidget(
-                              detcom: widget.detcom,
-                            )));
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(widget.detcom.title.toString()),
-            SizedBox(
-              height: 10,
-            ),
-            Text(widget.detcom.description.toString()),
-            Row(
-              children: [
-                Text(
-                  '  The order has been completed',
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Column(
-                  children: [
-                    Switch(
-                      value: widget.detcom.frstq,
-                      onChanged: (value) {
-                        setState(() {
-                          widget.detcom.changef();
-                          FirebaseFirestore.instance
-                              .collection("clients")
-                              .doc(widget.detcom.sndid)
-                              .collection('cmnds')
-                              .doc(widget.detcom.ran)
-                              .update({'frstq': value});
-                        });
-                      },
-                      activeTrackColor: Colors.lightGreenAccent,
-                      activeColor: Colors.green,
-                      inactiveTrackColor: Colors.grey,
-                      inactiveThumbColor: Colors.white,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('No'),
-                        SizedBox(width: 20),
-                        Text('Yes'),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  '  Order delivered:',
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Column(
-                  children: [
-                    Switch(
-                      value: widget.detcom.scndq,
-                      onChanged: (value) {
-                        setState(() {
-                          widget.detcom.changes();
-                          FirebaseFirestore.instance
-                              .collection("clients")
-                              .doc(widget.detcom.sndid)
-                              .collection('cmnds')
-                              .doc(widget.detcom.ran)
-                              .update({'scndq': value});
-                        });
-                      },
-                      activeTrackColor: Colors.lightGreenAccent,
-                      activeColor: Colors.green,
-                      inactiveTrackColor: Colors.grey,
-                      inactiveThumbColor: Colors.white,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('No'),
-                        SizedBox(width: 20),
-                        Text('Yes'),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Text(
-                  '  Order cancelled:',
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Column(
-                  children: [
-                    Switch(
-                      value: widget.detcom.thrdq,
-                      onChanged: (value) {
-                        setState(() {
-                          widget.detcom.changet();
-                          FirebaseFirestore.instance
-                              .collection("clients")
-                              .doc(widget.detcom.sndid)
-                              .collection('cmnds')
-                              .doc(widget.detcom.ran)
-                              .update({'thrdq': value});
-                        });
-                      },
-                      activeTrackColor: Colors.lightGreenAccent,
-                      activeColor: Colors.green,
-                      inactiveTrackColor: Colors.grey,
-                      inactiveThumbColor: Colors.white,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('No'),
-                        SizedBox(width: 20),
-                        Text('Yes'),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            )
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              GestureDetector(
+                child: (widget.detcom.image == null)
+                    ? Text("no image")
+                    : Image.network(widget.detcom.image.toString()),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MyWidget(
+                                detcom: widget.detcom,
+                              )));
+                },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(widget.detcom.title.toString()),
+              SizedBox(
+                height: 10,
+              ),
+              Text(widget.detcom.description.toString()),
+              Row(
+                children: [
+                  Text(
+                    '  The order has been completed',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Column(
+                    children: [
+                      Switch(
+                        value: widget.detcom.frstq,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.detcom.changef();
+                            FirebaseFirestore.instance
+                                .collection("clients")
+                                .doc(widget.detcom.sndid)
+                                .collection('cmnds')
+                                .doc(widget.detcom.ran)
+                                .update({'frstq': value});
+                          });
+                        },
+                        activeTrackColor: Colors.lightGreenAccent,
+                        activeColor: Colors.green,
+                        inactiveTrackColor: Colors.grey,
+                        inactiveThumbColor: Colors.white,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('No'),
+                          SizedBox(width: 20),
+                          Text('Yes'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    '  Order delivered:',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Column(
+                    children: [
+                      Switch(
+                        value: widget.detcom.scndq,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.detcom.changes();
+                            FirebaseFirestore.instance
+                                .collection("clients")
+                                .doc(widget.detcom.sndid)
+                                .collection('cmnds')
+                                .doc(widget.detcom.ran)
+                                .update({'scndq': value});
+                          });
+                        },
+                        activeTrackColor: Colors.lightGreenAccent,
+                        activeColor: Colors.green,
+                        inactiveTrackColor: Colors.grey,
+                        inactiveThumbColor: Colors.white,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('No'),
+                          SizedBox(width: 20),
+                          Text('Yes'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Text(
+                    '  Order cancelled:',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Column(
+                    children: [
+                      Switch(
+                        value: widget.detcom.thrdq,
+                        onChanged: (value) {
+                          setState(() {
+                            widget.detcom.changet();
+                            FirebaseFirestore.instance
+                                .collection("clients")
+                                .doc(widget.detcom.sndid)
+                                .collection('cmnds')
+                                .doc(widget.detcom.ran)
+                                .update({'thrdq': value});
+                          });
+                        },
+                        activeTrackColor: Colors.lightGreenAccent,
+                        activeColor: Colors.green,
+                        inactiveTrackColor: Colors.grey,
+                        inactiveThumbColor: Colors.white,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text('No'),
+                          SizedBox(width: 20),
+                          Text('Yes'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

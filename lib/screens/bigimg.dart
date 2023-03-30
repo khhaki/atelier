@@ -7,9 +7,7 @@ class MyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Expanded(
-            child: Container(
       child: Image.network(detcom.image.toString()),
-    )));
+    );
   }
 }

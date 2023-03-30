@@ -57,86 +57,85 @@ class _detailcomState extends State<detailcom> {
           title: Center(child: Text('Command information')),
         ),
         backgroundColor: Color.fromARGB(255, 252, 252, 249),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(25),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MyTextfld(
-                  cntrlr: _cmtitle,
-                  textInputTypee: TextInputType.text,
-                  obsc: false,
-                  hinttxt: " title:",
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                MyTextfld(
-                  cntrlr: _cmdesc,
-                  textInputTypee: TextInputType.text,
-                  obsc: false,
-                  hinttxt: " description and price:",
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      '  Image:  ',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    ElevatedButton(
-                        onPressed: () async {
-                          final firstCamera = await camee();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => TakePictureScreen(
-                                      camera: firstCamera,
-                                      dtcl: widget.detcl,
-                                      rann: ran)));
-                        },
-                        child: Text('Take a picture'))
-                  ],
-                ),
-                SizedBox(
-                  height: 300,
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Btnblue)),
-                  onPressed: () {
-                    {
-                      getData().doc(ran).set({
-                        'title': _cmtitle.text.trim(),
-                        'description': _cmdesc.text.trim(),
-                        'date': formatter,
-                        'frstq': false,
-                        'scndq': false,
-                        'thrdq': false,
-                        'rand': ran,
-                        'sndid': widget.detcl.idcl.toString()
-                      }, SetOptions(merge: true));
-                    }
-                    ;
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => detailcltwo(
-                                  detcl: widget.detcl,
-                                )));
-                  },
-                  child: Text(
-                    "Enter",
-                    style: TextStyle(fontSize: 19),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MyTextfld(
+                    cntrlr: _cmtitle,
+                    textInputTypee: TextInputType.text,
+                    obsc: false,
+                    hinttxt: " title:",
                   ),
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-              ],
+                  SizedBox(
+                    height: 25,
+                  ),
+                  MyTextfld(
+                    cntrlr: _cmdesc,
+                    textInputTypee: TextInputType.text,
+                    obsc: false,
+                    hinttxt: " description and price:",
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '  Image:  ',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      ElevatedButton(
+                          onPressed: () async {
+                            final firstCamera = await camee();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TakePictureScreen(
+                                        camera: firstCamera,
+                                        dtcl: widget.detcl,
+                                        rann: ran)));
+                          },
+                          child: Text('Take a picture'))
+                    ],
+                  ),
+                  SizedBox(
+                    height: 55,
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Btnblue)),
+                    onPressed: () {
+                      {
+                        getData().doc(ran).set({
+                          'title': _cmtitle.text.trim(),
+                          'description': _cmdesc.text.trim(),
+                          'date': formatter,
+                          'frstq': false,
+                          'scndq': false,
+                          'thrdq': false,
+                          'rand': ran,
+                          'sndid': widget.detcl.idcl.toString()
+                        }, SetOptions(merge: true));
+                      }
+                      ;
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => detailcltwo(
+                                    detcl: widget.detcl,
+                                  )));
+                    },
+                    child: Text(
+                      "Enter",
+                      style: TextStyle(fontSize: 19),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
